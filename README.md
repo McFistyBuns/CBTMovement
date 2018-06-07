@@ -9,7 +9,7 @@ CBT Movement is an attempt to bring Classic Battletech Tabletop movement rules f
 - Jumping incures an additional +2 ToHit Penalty
 - ToHit modifiers are allowed to go below your base to hit chance, making something easier to hit if you stack you modifiers right
 
-The way movement works currently in the game is that ToHitSelfWalk modifiers are applied whenever you make any movement.  So Sprinting, for example, will have a +1 for movement and an additional +1 for sprinting, bringing
+The way movement currently works in the game is that ToHitSelfWalk modifiers are applied whenever you make any movement.  So Sprinting, for example, will have a +1 for movement and an additional +1 for sprinting, bringing
 it in line with the original Tabletop rules of +2.  The same applies to the Jump ToHit Modifiers.
 
 ## Installation
