@@ -1,0 +1,15 @@
+{
+    "ToHit":
+    {
+        "ToHitSelfSprinted": 2,
+        "ToHitSelfWalkLight": 1,
+        "ToHitSelfWalkMedium": 1,
+        "ToHitSelfWalkHeavy": 1,
+        "ToHitSelfWalkAssault": 1,
+        "ToHitSelfWalkVehicle": 1
+    },
+    "ResolutionConstants":
+    {
+        "AllowTotalNegativeModifier": true
+    },
+}
