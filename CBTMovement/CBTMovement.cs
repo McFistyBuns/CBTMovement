@@ -13,42 +13,15 @@ using JetBrains.Annotations;
 
 namespace CBTMovement
 {
-    // CODE FROM MORPHYUM
-    public static class ReflectionHelper
+    [HarmonyPatch(typeof(GameSettingsModule), "InitSettings")]
+    public static class GameSettingsModule_InitSettings_Patch
     {
-        public static object InvokePrivateMethode(object instance, string methodname, object[] parameters)
+        private static void Postfix(GameSettingsModule __instance)
         {
-            var type = instance.GetType();
-            var methodInfo = type.GetMethod(methodname, BindingFlags.NonPublic | BindingFlags.Instance);
-            return methodInfo.Invoke(instance, parameters);
-        }
-
-        public static object InvokePrivateMethode(object instance, string methodname, object[] parameters, Type[] types)
-        {
-            var type = instance.GetType();
-            var methodInfo = type.GetMethod(methodname, BindingFlags.NonPublic | BindingFlags.Instance, null, types, null);
-            return methodInfo.Invoke(instance, parameters);
-        }
-
-        public static void SetPrivateProperty(object instance, string propertyname, object value)
-        {
-            var type = instance.GetType();
-            var property = type.GetProperty(propertyname, BindingFlags.NonPublic | BindingFlags.Instance);
-            property.SetValue(instance, value, null);
-        }
-
-        public static void SetPrivateField(object instance, string fieldname, object value)
-        {
-            var type = instance.GetType();
-            var field = type.GetField(fieldname, BindingFlags.NonPublic | BindingFlags.Instance);
-            field.SetValue(instance, value);
-        }
-
-        public static object GetPrivateField(object instance, string fieldname)
-        {
-            var type = instance.GetType();
-            var field = type.GetField(fieldname, BindingFlags.NonPublic | BindingFlags.Instance);
-            return field.GetValue(instance);
+            if (CBTMovement.Settings.OverrideAutoSelectNextUnit)
+            {
+                __instance.AutoSelectNextUnitToggle.SetToggled(true);
+            }
         }
     }
 
@@ -85,9 +58,11 @@ namespace CBTMovement
         private static void Postfix(CombatHUDWeaponSlot __instance, ICombatant target)
         {
             AbstractActor actor = __instance.DisplayedWeapon.parent;
+            var _this = Traverse.Create(__instance);
+
             if (actor.HasMovedThisRound && actor.JumpedLastRound)
             {
-                ReflectionHelper.InvokePrivateMethode(__instance, "AddToolTipDetail", new object[] { "JUMPED SELF", CBTMovement.Settings.ToHitSelfJumped });
+                _this.Method("AddToolTipDetail", "JUMPED SELF", CBTMovement.Settings.ToHitSelfJumped ).GetValue();
             }
         }
     }
@@ -144,6 +119,9 @@ namespace CBTMovement
     {
         [JsonProperty("ToHitSelfJumped")]
         public int ToHitSelfJumped { get; set; }
+
+        [JsonProperty("OverrideAutoSelectNextUnit")]
+        public bool OverrideAutoSelectNextUnit { get; set; }
     }
 
     public static class CBTMovement

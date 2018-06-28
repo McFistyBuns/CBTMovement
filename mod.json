@@ -2,7 +2,7 @@
     "Name": "CBTMovement",
     "Enabled": true,
 
-    "Version": "v0.2",
+    "Version": "v0.3.0",
     "Description": "Adopts Classic Battletech Tabletop movement rules",
     "Author": "Joe Guetler",
     "Website": "",
@@ -11,6 +11,7 @@
 	"DLL": "CBTMovement.dll",
 
     "Settings": {
-        "ToHitSelfJumped": 2
+        "ToHitSelfJumped": 2,
+        "OverrideAutoSelectNextUnit": true
     }
 }
