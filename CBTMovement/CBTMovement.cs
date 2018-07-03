@@ -13,18 +13,6 @@ using JetBrains.Annotations;
 
 namespace CBTMovement
 {
-    [HarmonyPatch(typeof(GameSettingsModule), "InitSettings")]
-    public static class GameSettingsModule_InitSettings_Patch
-    {
-        private static void Postfix(GameSettingsModule __instance)
-        {
-            if (CBTMovement.Settings.OverrideAutoSelectNextUnit)
-            {
-                __instance.AutoSelectNextUnitToggle.SetToggled(true);
-            }
-        }
-    }
-
     //public float GetAllModifiers(AbstractActor attacker, Weapon weapon, ICombatant target, Vector3 attackPosition, Vector3 targetPosition, LineOfFireLevel lofLevel, bool isCalledShot)
     [HarmonyPatch(typeof(ToHit), "GetAllModifiers")]
     public static class ToHit_GetAllModifiers_Patch
@@ -119,9 +107,6 @@ namespace CBTMovement
     {
         [JsonProperty("ToHitSelfJumped")]
         public int ToHitSelfJumped { get; set; }
-
-        [JsonProperty("OverrideAutoSelectNextUnit")]
-        public bool OverrideAutoSelectNextUnit { get; set; }
     }
 
     public static class CBTMovement
