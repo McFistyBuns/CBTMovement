@@ -13,6 +13,22 @@ using JetBrains.Annotations;
 
 namespace CBTMovement
 {
+    [HarmonyPatch(typeof(EncounterLayerData))]
+    [HarmonyPatch("ContractInitialize")]
+    public static class EncounterLayerData_ContractInitialize_Patch
+    {
+        static void Prefix(EncounterLayerData __instance)
+        {
+            try
+            {
+                __instance.turnDirectorBehavior = TurnDirectorBehaviorType.AlwaysInterleaved;
+            }
+            catch (Exception e)
+            {
+            }
+        }
+    }
+
     //public float GetAllModifiers(AbstractActor attacker, Weapon weapon, ICombatant target, Vector3 attackPosition, Vector3 targetPosition, LineOfFireLevel lofLevel, bool isCalledShot)
     [HarmonyPatch(typeof(ToHit), "GetAllModifiers")]
     public static class ToHit_GetAllModifiers_Patch
